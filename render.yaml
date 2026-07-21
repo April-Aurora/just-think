@@ -22,3 +22,5 @@ services:
         value: "20"
       - key: MINUTE_ANALYSIS_LIMIT
         value: "5"
+      - key: HOST
+        value: 0.0.0.0
