@@ -8,6 +8,7 @@ const ENV_FILE = path.join(ROOT, ".env");
 if (fs.existsSync(ENV_FILE)) process.loadEnvFile(ENV_FILE);
 
 const PORT = Number(process.env.PORT || 4173);
+const HOST = process.env.HOST?.trim() || "127.0.0.1";
 const AI_API_KEY = process.env.AI_API_KEY?.trim();
 const AI_BASE_URL = process.env.AI_BASE_URL?.trim().replace(/\/$/, "");
 const AI_MODEL = process.env.AI_MODEL?.trim();
@@ -484,7 +485,7 @@ const server = http.createServer(async (request, response) => {
   sendJSON(response, 405, { error: "Method not allowed" });
 });
 
-server.listen(PORT, "127.0.0.1", () => {
-  console.log(`随便想想已启动：http://127.0.0.1:${PORT}/`);
+server.listen(PORT, HOST, () => {
+  console.log(`随便想想已启动：http://${HOST}:${PORT}/`);
   console.log(AI_CONFIGURED ? `AI 已配置：${AI_MODEL}` : "AI 未配置：请复制 .env.example 为 .env 并填写配置");
 });
