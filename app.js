@@ -5,9 +5,9 @@ const STORAGE_KEYS = {
 };
 
 const seedIdeas = [
-  { id: crypto.randomUUID(), text: "测试想法 01：为内容创作者设计一个灵感整理工具。", category: "待整理", createdAt: Date.now() - 1000 * 60 * 12 },
-  { id: crypto.randomUUID(), text: "测试想法 02：比较两个产品方向的共同点和关键差异。", category: "待整理", createdAt: Date.now() - 1000 * 60 * 8 },
-  { id: crypto.randomUUID(), text: "测试想法 03：把一个模糊点子拆成下周可以验证的行动。", category: "待整理", createdAt: Date.now() - 1000 * 60 * 3 }
+  { id: crypto.randomUUID(), text: "测试想法 01：做一档让观众决定下一秒剧情的短视频。", category: "待整理", createdAt: Date.now() - 1000 * 60 * 12 },
+  { id: crypto.randomUUID(), text: "测试想法 02：把城市里没被注意的声音做成可收集的情绪地图。", category: "待整理", createdAt: Date.now() - 1000 * 60 * 8 },
+  { id: crypto.randomUUID(), text: "测试想法 03：做一个让陌生人交换‘今天没说出口的话’的夜间电台。", category: "待整理", createdAt: Date.now() - 1000 * 60 * 3 }
 ];
 
 let ideas = load(STORAGE_KEYS.ideas, seedIdeas);
@@ -613,7 +613,7 @@ function saveCurrentResult() {
     sourceIds: [...selected]
   });
   persist();
-  showToast("已保存到分析档案");
+  showToast("已保存到灵感档案");
   switchView("archive");
 }
 
@@ -670,7 +670,7 @@ function bindEvents() {
   $("#saveResult").addEventListener("click", saveCurrentResult);
   $("#clearArchive").addEventListener("click", () => {
     if (!results.length) return showToast("档案已经是空的");
-    if (window.confirm("确定清空所有分析档案吗？")) { results = []; persist(); renderArchive(); showToast("分析档案已清空"); }
+    if (window.confirm("确定清空所有灵感档案吗？")) { results = []; persist(); renderArchive(); showToast("灵感档案已清空"); }
   });
   $("#themePulse").addEventListener("click", () => document.body.classList.toggle("focus-mode"));
   document.addEventListener("pointermove", event => {
