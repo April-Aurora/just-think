@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#070807">
-  <meta name="description" content="随便想想 - 帮内容创作者记录、整理和分析零散想法的 AI 工作台">
+  <meta name="description" content="随便想想 - 帮内容创作者记录、探索和连接零散想法的 AI 灵感空间">
   <title>随便想想 / AI 想法工作台</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -108,7 +108,7 @@
         <div class="library-toolbar">
           <div class="section-heading">
             <span>01</span>
-            <div><h2>想法库</h2><p>选择多个想法，交给 AI 找到结构</p></div>
+            <div><h2>想法库</h2><p>选几条想法，让它们去远处碰一碰</p></div>
           </div>
           <div class="toolbar-actions">
             <button class="arrange-button" id="autoArrange" type="button" title="自动排列想法卡片">
@@ -208,19 +208,19 @@
             </div>
             <div id="resultContent"></div>
             <label class="result-note">我的补充<textarea id="resultNote" placeholder="在这里补充你的判断……"></textarea></label>
-            <button class="primary-button full-width" id="saveResult" type="button">保存到分析档案</button>
+            <button class="primary-button full-width" id="saveResult" type="button">保存到灵感档案</button>
           </article>
         </div>
       </section>
 
       <section class="view" id="archiveView" data-view-panel="archive">
         <div class="archive-head">
-          <div class="section-heading"><span>03</span><div><h2>分析档案</h2><p>把已经成形的思路留在这里</p></div></div>
+          <div class="section-heading"><span>03</span><div><h2>灵感档案</h2><p>把曾经长出的分支留在这里</p></div></div>
           <button class="outline-button" id="clearArchive" type="button">清空档案</button>
         </div>
         <div class="archive-list" id="archiveList"></div>
         <div class="empty-state" id="emptyArchive">
-          <span>00</span><h3>还没有分析结果</h3><p>从想法库选择内容，完成一次 AI 整理后保存。</p>
+          <span>00</span><h3>还没有灵感档案</h3><p>从想法库带走几条念头，完成一次探索后保存。</p>
           <button class="primary-button" data-back-to-ideas type="button">去选择想法</button>
         </div>
       </section>
