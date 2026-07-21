@@ -51,10 +51,10 @@
           <span class="nav-index">01</span><span>想法库</span><span class="nav-count" id="ideaCount">03</span>
         </button>
         <button class="nav-item" data-view="studio">
-          <span class="nav-index">02</span><span>AI 整理台</span><span class="status-dot"></span>
+          <span class="nav-index">02</span><span>灵感实验室</span><span class="status-dot"></span>
         </button>
         <button class="nav-item" data-view="archive">
-          <span class="nav-index">03</span><span>分析档案</span><span class="nav-count" id="resultCount">00</span>
+          <span class="nav-index">03</span><span>灵感档案</span><span class="nav-count" id="resultCount">00</span>
         </button>
       </nav>
 
@@ -130,10 +130,10 @@
         </div>
 
         <div class="selection-bar" id="selectionBar">
-          <span><b id="selectedCount">0</b> 个想法已进入分析队列</span>
+          <span><b id="selectedCount">0</b> 个想法准备出发</span>
           <div>
             <button class="text-button" id="clearSelection" type="button">清空</button>
-            <button class="primary-button compact" id="sendToAI" type="button">送入 AI 整理台 <b>打开</b></button>
+            <button class="primary-button compact" id="sendToAI" type="button">带去灵感实验室 <b>打开</b></button>
           </div>
         </div>
 
@@ -148,7 +148,7 @@
           <aside class="source-column">
             <div class="source-column-head">
               <div class="section-heading inverse">
-                <span>01</span><div><h2>输入想法</h2><p id="studioSelectedCount">0 条已选择，可在这里调整</p></div>
+                <span>IDEAS</span><div><h2>带上这些想法</h2><p id="studioSelectedCount">0 条已选择，可在这里调整</p></div>
               </div>
               <div class="source-counter" aria-hidden="true"><span>已选择</span><b id="studioSelectedGauge">00 / 03</b></div>
             </div>
@@ -158,50 +158,52 @@
 
           <section class="analysis-column">
             <div class="analysis-header">
-              <div><p class="eyebrow dark">02 / 分析方式</p><h2>选择处理方向</h2></div>
+              <div><p class="eyebrow dark">EXPLORE / 灵感模式</p><h2>让想法往哪里生长</h2></div>
               <span class="engine-state offline"><i></i><span id="engineStateLabel">AI 服务检测中</span></span>
             </div>
 
-            <div class="analysis-core-stage" aria-hidden="true">
-              <div class="core-orbit"><i></i><i></i><i></i></div>
-              <div class="core-sphere"><span></span></div>
-              <div class="core-readout">
-                <small>当前方式</small>
-                <strong id="coreModeLabel">理清想法</strong>
-                <span id="coreSelectionLabel">等待选择想法</span>
+            <div class="analysis-core-stage">
+              <div class="analysis-core" aria-hidden="true">
+                <div class="core-orbit"><i></i><i></i><i></i></div>
+                <div class="core-sphere"><span></span></div>
+                <div class="core-readout">
+                  <small>当前探索</small>
+                  <strong id="coreModeLabel">灵感漫游</strong>
+                  <span id="coreSelectionLabel">先带上一条想法</span>
+                </div>
               </div>
-            </div>
 
-            <div class="mode-switch" role="radiogroup" aria-label="AI 整理模式">
-              <button class="mode-option active" data-mode="structure" role="radio" aria-checked="true"><b>01</b><span>理清想法<small>提取核心、问题和边界</small></span></button>
-              <button class="mode-option" data-mode="connect" role="radio" aria-checked="false"><b>02</b><span>找到联系<small>合并线索、发现共同方向</small></span></button>
-              <button class="mode-option" data-mode="next" role="radio" aria-checked="false"><b>03</b><span>给出下一步<small>转成可以执行的验证动作</small></span></button>
+              <div class="mode-switch" role="radiogroup" aria-label="灵感探索模式">
+                <button class="mode-option mode-roam active" data-mode="structure" role="radio" aria-checked="true"><span class="mode-kicker">自由生长</span><strong>灵感漫游</strong><small>沿着念头，发现还没说出的分支</small></button>
+                <button class="mode-option mode-collision" data-mode="connect" role="radio" aria-checked="false"><span class="mode-kicker">远距联想</span><strong>意外碰撞</strong><small>让不同想法撞出新的可能</small></button>
+                <button class="mode-option mode-parallel" data-mode="next" role="radio" aria-checked="false"><span class="mode-kicker">规则变奏</span><strong>平行想象</strong><small>换掉一个条件，看看另一个世界</small></button>
+              </div>
             </div>
           </section>
 
           <section class="instruction-column">
-            <div class="instruction-head"><span>03</span><div><p>补充要求</p><h2>告诉 AI 关注什么</h2></div></div>
+            <div class="instruction-head"><span>TUNE</span><div><p>探索偏好</p><h2>给想象一点方向</h2></div></div>
             <label class="instruction-box" for="instructionInput">
               <span>可选</span>
-              <textarea id="instructionInput" maxlength="200" placeholder="例如：从产品经理视角分析，重点看用户价值和风险"></textarea>
+              <textarea id="instructionInput" maxlength="200" placeholder="例如：尽量大胆一点，往情绪、游戏和线下体验方向发散"></textarea>
             </label>
 
             <button class="generate-button" id="generateButton" type="button">
-              <span>开始整理</span><span class="generate-meta"><i></i> 真实 AI</span>
+              <span>开始探索</span><span class="generate-meta"><i></i> 真实 AI</span>
             </button>
 
             <div class="processing-panel" id="processingPanel" hidden>
-              <div class="scan-head"><span>AI 正在重组想法</span><b id="progressNumber">00%</b></div>
+              <div class="scan-head"><span>AI 正在让想法生长</span><b id="progressNumber">00%</b></div>
               <div class="scan-track"><i id="progressBar"></i></div>
               <ol id="processSteps">
-                <li>读取输入内容</li><li>识别共同主题</li><li>构建结果结构</li><li>检查可用性</li>
+                <li>捕捉有趣内核</li><li>拉开联想距离</li><li>生成不同分支</li><li>保留原始火花</li>
               </ol>
             </div>
           </section>
 
           <article class="result-panel" id="resultPanel" hidden>
             <div class="result-topline">
-              <div><span class="result-label">AI OUTPUT</span><span id="resultTime">刚刚生成</span></div>
+              <div><span class="result-label">AI SPARKS</span><span id="resultTime">刚刚生成</span></div>
               <div><button class="text-button" id="retryButton" type="button">重新生成</button><button class="text-button" id="copyButton" type="button">复制结果</button></div>
             </div>
             <div id="resultContent"></div>
