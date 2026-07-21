@@ -457,8 +457,8 @@ function addIdea() {
 
 const viewCopy = {
   ideas: ["THOUGHT SPACE / NOW", "让想法在这里漂浮"],
-  studio: ["WORKSPACE / AI STUDIO", "把零散线索变成可用结构"],
-  archive: ["WORKSPACE / ARCHIVE", "回看已经成形的思路"]
+  studio: ["IMAGINATION FIELD / AI", "把一个念头，想得更远"],
+  archive: ["MEMORY / SPARKS", "回看曾经长出的灵感分支"]
 };
 
 function switchView(name) {
@@ -480,7 +480,7 @@ function renderSources() {
     <div class="source-item ${selected.has(item.id) ? "selected" : ""}" data-id="${item.id}">
       <div class="source-item-top">
         <span>IDEA ${String(index + 1).padStart(2, "0")}</span>
-        <input class="source-check" type="checkbox" aria-label="在 AI 整理台选择想法：${escapeHTML(item.text)}" ${selected.has(item.id) ? "checked" : ""}>
+        <input class="source-check" type="checkbox" aria-label="在灵感实验室选择想法：${escapeHTML(item.text)}" ${selected.has(item.id) ? "checked" : ""}>
       </div>
       <p>${escapeHTML(item.text)}</p>
     </div>`).join("")
@@ -504,18 +504,18 @@ function renderSources() {
 }
 
 function updateStudioCore() {
-  const modeLabels = { structure: "理清想法", connect: "找到联系", next: "给出下一步" };
+  const modeLabels = { structure: "灵感漫游", connect: "意外碰撞", next: "平行想象" };
   const modeLabel = $("#coreModeLabel");
   const selectionLabel = $("#coreSelectionLabel");
   if (modeLabel) modeLabel.textContent = modeLabels[currentMode];
-  if (selectionLabel) selectionLabel.textContent = selected.size ? `${selected.size} 条想法已进入分析` : "等待选择想法";
+  if (selectionLabel) selectionLabel.textContent = selected.size ? `${selected.size} 条想法正在一起探索` : "先带上一条想法";
 }
 
 function renderResult(result) {
   $("#resultContent").innerHTML = `
-    <div class="result-block"><h3><b>00</b>${escapeHTML(result.title)}</h3><p>${escapeHTML(result.summary)}</p></div>
-    ${result.sections.map((section, index) => `<div class="result-block"><h3><b>${String(index + 1).padStart(2, "0")}</b>${escapeHTML(section[0])}</h3><ul>${section[1].map(item => `<li>${escapeHTML(item)}</li>`).join("")}</ul></div>`).join("")}
-    ${result.instruction ? `<div class="result-block"><h3><b>+</b>你的补充要求</h3><p>${escapeHTML(result.instruction)}</p></div>` : ""}`;
+    <div class="result-block"><h3><b>ORIGIN</b>${escapeHTML(result.title)}</h3><p>${escapeHTML(result.summary)}</p></div>
+    ${result.sections.map(section => `<div class="result-block"><h3><b>BRANCH</b>${escapeHTML(section[0])}</h3><ul>${section[1].map(item => `<li>${escapeHTML(item)}</li>`).join("")}</ul></div>`).join("")}
+    ${result.instruction ? `<div class="result-block"><h3><b>TUNE</b>你的探索偏好</h3><p>${escapeHTML(result.instruction)}</p></div>` : ""}`;
   $("#resultTime").textContent = "刚刚生成";
   $("#resultPanel").hidden = false;
 }
@@ -570,7 +570,7 @@ async function startGeneration() {
     updateProgress(100);
     currentResult = data.result;
     renderResult(currentResult);
-    showToast("真实 AI 整理完成，可继续补充或保存");
+    showToast("灵感探索完成，可以继续补充或保存");
   } catch (error) {
     clearInterval(progressTimer);
     showToast(error.message || "AI 分析失败，请稍后重试");
