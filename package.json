@@ -1,0 +1,13 @@
+{
+  "name": "suibianxiangxiang-web",
+  "version": "0.2.0",
+  "private": true,
+  "description": "AI idea organizer prototype",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

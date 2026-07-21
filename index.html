@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#070807">
+  <meta name="description" content="随便想想 - 帮内容创作者记录、整理和分析零散想法的 AI 工作台">
+  <title>随便想想 / AI 想法工作台</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="access-pending">
+  <div class="cosmos" aria-hidden="true">
+    <div class="aurora-ribbon ribbon-a"></div>
+    <div class="aurora-ribbon ribbon-b"></div>
+    <div class="aurora-ribbon ribbon-c"></div>
+    <div class="starfield"></div>
+  </div>
+  <div class="access-gate" id="accessGate" hidden>
+    <section class="access-panel" role="dialog" aria-modal="true" aria-labelledby="accessTitle" aria-describedby="accessDescription">
+      <div class="access-track" aria-hidden="true"><i></i></div>
+      <div class="access-panel-main">
+        <header class="access-panel-head">
+          <span class="access-state"><i></i>仅限受邀体验</span>
+          <span>01 / ACCESS</span>
+        </header>
+        <div class="access-panel-body">
+          <h1 id="accessTitle">输入访问码</h1>
+          <p id="accessDescription">每位访客 24 小时内最多进行 <b id="accessDailyLimit">20</b> 次 AI 分析。</p>
+          <form id="accessForm">
+            <label for="accessCode">访问码</label>
+            <input id="accessCode" name="accessCode" type="password" autocomplete="current-password" spellcheck="false" required>
+            <button id="accessSubmit" type="submit">进入</button>
+          </form>
+          <p class="access-error" id="accessError" role="alert" aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <div><strong>随便想想</strong><small>IDEA OS / 01</small></div>
+      </div>
+
+      <nav class="main-nav" aria-label="主导航">
+        <button class="nav-item active" data-view="ideas">
+          <span class="nav-index">01</span><span>想法库</span><span class="nav-count" id="ideaCount">03</span>
+        </button>
+        <button class="nav-item" data-view="studio">
+          <span class="nav-index">02</span><span>AI 整理台</span><span class="status-dot"></span>
+        </button>
+        <button class="nav-item" data-view="archive">
+          <span class="nav-index">03</span><span>分析档案</span><span class="nav-count" id="resultCount">00</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-meter">
+        <div class="meter-label"><span>本地存储</span><span id="storageLabel">0.0 KB</span></div>
+        <div class="meter-track"><i id="storageMeter"></i></div>
+        <p>数据只保存在当前浏览器</p>
+      </div>
+
+      <div class="sidebar-foot">
+        <span class="online-indicator"><i></i> 本地模式</span>
+        <span>V0.1</span>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow" id="viewEyebrow">THOUGHT SPACE / NOW</p>
+          <h1 id="viewTitle">让想法在这里漂浮</h1>
+        </div>
+        <div class="topbar-meta">
+          <span id="clock">00:00:00</span>
+          <button class="icon-button" id="themePulse" type="button" aria-label="切换聚焦模式" title="聚焦模式">
+            <span class="focus-icon" aria-hidden="true"></span>
+          </button>
+        </div>
+      </header>
+
+      <section class="view active" id="ideasView" data-view-panel="ideas">
+        <div class="capture-panel">
+          <div class="capture-number"><i></i><span>当下想法</span></div>
+          <div class="capture-main">
+            <label for="ideaInput">现在，脑海里闪过了什么？</label>
+            <textarea id="ideaInput" maxlength="280" placeholder="先写下来，不需要完整。按 Ctrl + Enter 保存。"></textarea>
+            <div class="capture-actions">
+              <div class="input-tools">
+                <select id="categoryInput" aria-label="选择分类">
+                  <option value="待整理">待整理</option>
+                  <option value="产品点子">产品点子</option>
+                  <option value="内容选题">内容选题</option>
+                  <option value="观察">观察</option>
+                </select>
+                <span id="charCount">0 / 280</span>
+              </div>
+              <button class="primary-button" id="saveIdea" type="button"><span>保存想法</span><b>CTRL+ENTER</b></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="library-toolbar">
+          <div class="section-heading">
+            <span>01</span>
+            <div><h2>想法库</h2><p>选择多个想法，交给 AI 找到结构</p></div>
+          </div>
+          <div class="toolbar-actions">
+            <button class="arrange-button" id="autoArrange" type="button" title="自动排列想法卡片">
+              <span class="arrange-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+              <span>自动排列</span>
+            </button>
+            <label class="search-box">
+              <span>搜索</span>
+              <input id="searchInput" type="search" placeholder="关键词">
+            </label>
+            <select id="filterSelect" aria-label="筛选分类">
+              <option value="全部">全部分类</option>
+              <option value="待整理">待整理</option>
+              <option value="产品点子">产品点子</option>
+              <option value="内容选题">内容选题</option>
+              <option value="观察">观察</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="selection-bar" id="selectionBar">
+          <span><b id="selectedCount">0</b> 个想法已进入分析队列</span>
+          <div>
+            <button class="text-button" id="clearSelection" type="button">清空</button>
+            <button class="primary-button compact" id="sendToAI" type="button">送入 AI 整理台 <b>打开</b></button>
+          </div>
+        </div>
+
+        <div class="idea-grid" id="ideaGrid"></div>
+        <div class="empty-state" id="emptyIdeas" hidden>
+          <span>00</span><h3>这里还没有想法</h3><p>记录第一条零散念头，之后再决定它要去哪里。</p>
+        </div>
+      </section>
+
+      <section class="view" id="studioView" data-view-panel="studio">
+        <div class="studio-layout">
+          <aside class="source-column">
+            <div class="source-column-head">
+              <div class="section-heading inverse">
+                <span>01</span><div><h2>输入想法</h2><p id="studioSelectedCount">0 条已选择，可在这里调整</p></div>
+              </div>
+              <div class="source-counter" aria-hidden="true"><span>已选择</span><b id="studioSelectedGauge">00 / 03</b></div>
+            </div>
+            <div class="source-list" id="sourceList"></div>
+            <button class="outline-button full" data-back-to-ideas type="button">返回想法库继续选择</button>
+          </aside>
+
+          <section class="analysis-column">
+            <div class="analysis-header">
+              <div><p class="eyebrow dark">02 / 分析方式</p><h2>选择处理方向</h2></div>
+              <span class="engine-state offline"><i></i><span id="engineStateLabel">AI 服务检测中</span></span>
+            </div>
+
+            <div class="analysis-core-stage" aria-hidden="true">
+              <div class="core-orbit"><i></i><i></i><i></i></div>
+              <div class="core-sphere"><span></span></div>
+              <div class="core-readout">
+                <small>当前方式</small>
+                <strong id="coreModeLabel">理清想法</strong>
+                <span id="coreSelectionLabel">等待选择想法</span>
+              </div>
+            </div>
+
+            <div class="mode-switch" role="radiogroup" aria-label="AI 整理模式">
+              <button class="mode-option active" data-mode="structure" role="radio" aria-checked="true"><b>01</b><span>理清想法<small>提取核心、问题和边界</small></span></button>
+              <button class="mode-option" data-mode="connect" role="radio" aria-checked="false"><b>02</b><span>找到联系<small>合并线索、发现共同方向</small></span></button>
+              <button class="mode-option" data-mode="next" role="radio" aria-checked="false"><b>03</b><span>给出下一步<small>转成可以执行的验证动作</small></span></button>
+            </div>
+          </section>
+
+          <section class="instruction-column">
+            <div class="instruction-head"><span>03</span><div><p>补充要求</p><h2>告诉 AI 关注什么</h2></div></div>
+            <label class="instruction-box" for="instructionInput">
+              <span>可选</span>
+              <textarea id="instructionInput" maxlength="200" placeholder="例如：从产品经理视角分析，重点看用户价值和风险"></textarea>
+            </label>
+
+            <button class="generate-button" id="generateButton" type="button">
+              <span>开始整理</span><span class="generate-meta"><i></i> 真实 AI</span>
+            </button>
+
+            <div class="processing-panel" id="processingPanel" hidden>
+              <div class="scan-head"><span>AI 正在重组想法</span><b id="progressNumber">00%</b></div>
+              <div class="scan-track"><i id="progressBar"></i></div>
+              <ol id="processSteps">
+                <li>读取输入内容</li><li>识别共同主题</li><li>构建结果结构</li><li>检查可用性</li>
+              </ol>
+            </div>
+          </section>
+
+          <article class="result-panel" id="resultPanel" hidden>
+            <div class="result-topline">
+              <div><span class="result-label">AI OUTPUT</span><span id="resultTime">刚刚生成</span></div>
+              <div><button class="text-button" id="retryButton" type="button">重新生成</button><button class="text-button" id="copyButton" type="button">复制结果</button></div>
+            </div>
+            <div id="resultContent"></div>
+            <label class="result-note">我的补充<textarea id="resultNote" placeholder="在这里补充你的判断……"></textarea></label>
+            <button class="primary-button full-width" id="saveResult" type="button">保存到分析档案</button>
+          </article>
+        </div>
+      </section>
+
+      <section class="view" id="archiveView" data-view-panel="archive">
+        <div class="archive-head">
+          <div class="section-heading"><span>03</span><div><h2>分析档案</h2><p>把已经成形的思路留在这里</p></div></div>
+          <button class="outline-button" id="clearArchive" type="button">清空档案</button>
+        </div>
+        <div class="archive-list" id="archiveList"></div>
+        <div class="empty-state" id="emptyArchive">
+          <span>00</span><h3>还没有分析结果</h3><p>从想法库选择内容，完成一次 AI 整理后保存。</p>
+          <button class="primary-button" data-back-to-ideas type="button">去选择想法</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>

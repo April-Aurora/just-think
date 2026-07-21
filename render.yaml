@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: suibianxiangxiang-demo
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: AI_API_KEY
+        sync: false
+      - key: ACCESS_CODE
+        sync: false
+      - key: AI_BASE_URL
+        value: https://api.deepseek.com
+      - key: AI_MODEL
+        value: deepseek-v4-flash
+      - key: AI_API_TYPE
+        value: chat_completions
+      - key: AI_THINKING_MODE
+        value: disabled
+      - key: DAILY_ANALYSIS_LIMIT
+        value: "20"
+      - key: MINUTE_ANALYSIS_LIMIT
+        value: "5"
